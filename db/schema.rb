@@ -11,9 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20160316153629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "users", primary_key: "user_id", force: :cascade do |t|
+    t.string "username", limit: 30, null: false
+  end
+
+  add_index "users", ["username"], name: "users_username_key", unique: true, using: :btree
 
 end
