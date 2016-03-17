@@ -1,11 +1,31 @@
 Rails.application.routes.draw do
+  get 'amenities/index'
+
+  get 'amenities/show'
+
+  get 'amenities/new'
+
+  get 'amenities/edit'
+
+  get 'amenities/index'
+
+  get 'amenities/show'
+
+  get 'amenities/new'
+
+  get 'amenities/edit'
+
   resources :ratings, :only => [:index, :new, :show, :create, :destroy]
   resources :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+   root 'users#index'
+
+
+  #Special routes
+  get 'amenities', to: 'amenities#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

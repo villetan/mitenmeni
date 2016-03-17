@@ -15,7 +15,7 @@
     <% @ratings.each do |rating| %>
       <tr>
         <td><%= rating.score %></td>
-        <td><%= rating.user_id %></td>
+        <td><%= link_to  rating.user.username, user_path(rating.user_id) %></td>
         <td><%= link_to 'Show', rating %></td>
         <td><%= link_to 'Destroy', rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

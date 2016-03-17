@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user=User.getUser(params[:id])
+    @ratings = @user.getRatings
   end
 
   # GET /users/new

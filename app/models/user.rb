@@ -30,4 +30,8 @@ class User < ActiveRecord::Base
     User.find_by_sql(["UPDATE users SET username=? WHERE user_id=?", params[:username], self.id])
   end
 
+  def getRatings
+    Rating.find_by_sql(["SELECT * FROM ratings WHERE user_id=?", self.id]).to_a
+  end
+
 end
