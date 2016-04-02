@@ -15,6 +15,14 @@ Rails.application.routes.draw do
 
   get 'amenities/edit'
 
+  resource :session, only: [:new, :create, :destroy]
+
+  get 'signin', to: 'sessions#new'
+  #delete does not work dunno why
+  delete 'signout', to: 'sessions#destroy'
+
+  get 'signup', to: 'users#new'
+
   resources :ratings, :only => [:index, :new, :show, :create, :destroy]
   resources :users
   # The priority is based upon order of creation: first created -> highest priority.
@@ -26,6 +34,9 @@ Rails.application.routes.draw do
 
   #Special routes
   get 'amenities', to: 'amenities#index'
+
+  get 'places', to: 'places#index'
+  post 'places', to:'places#search'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

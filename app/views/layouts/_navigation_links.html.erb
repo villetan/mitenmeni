@@ -1,0 +1,12 @@
+<%# add navigation links to this file %>
+<li><%= link_to 'users', users_path%></li>
+<li><%= link_to 'ratings', ratings_path%></li>
+<li><%= link_to 'search',places_path %></li>
+<% if current_user %>
+    <li><%= link_to current_user.username, current_user %></li>
+    <li><%= link_to 'Sign out', signout_path, method: :delete%></li>
+<% else %>
+    <li><%= link_to 'Sign in', signin_path%></li>
+    <li><%= link_to 'Sign up', signup_path%></li>
+<% end %>
+

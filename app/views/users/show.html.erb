@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <p>
   <strong>Username:</strong>
@@ -18,7 +18,7 @@
   <tbody>
   <% @ratings.each do |rating| %>
       <tr>
-        <td><%= link_to rating.score, rating_path %></td>
+        <td><%= link_to rating.score, rating_path(rating) %></td>
       </tr>
   <% end %>
   </tbody>

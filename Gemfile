@@ -16,6 +16,14 @@ gem 'coffee-rails', '~> 4.1.0'
 #Google maps
 gem 'gmaps4rails'
 
+gem 'bootstrap-sass'
+
+gem 'bcrypt', '~> 3.1.7'
+
+gem 'foursquare2'
+
+gem 'google_places'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -43,7 +51,7 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-
+  gem 'rails_layout'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end

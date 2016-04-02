@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  require 'bcrypt'
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -27,11 +28,15 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
 
     respond_to do |format|
       if User.validate?(user_params)
-        User.createNew(user_params[:username])
+        password_salt = BCrypt::Engine.generate_salt
+        password_encrypted = BCrypt::Engine.hash_secret(user_params["password"], password_salt)
+        User.createNew(user_params, password_encrypted,password_salt)
+        @user= User.getUserByUsername(user_params[:username])
+        #@user.save
+        session[:user_id]=@user.id
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
@@ -47,7 +52,7 @@ class UsersController < ApplicationController
     respond_to do |format|
 
       if User.validate?(params[:user])
-          @user.updateUser(params[:user])
+        @user.updateUser(params[:user])
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -68,13 +73,13 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:username)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:username, :password, :password_confirmation)
+  end
 end
