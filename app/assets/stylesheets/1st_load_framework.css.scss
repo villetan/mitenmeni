@@ -5,6 +5,7 @@
 // make all images responsive by default
 img {
   @extend .img-responsive;
+  width: 100%;
   margin: 0 auto;
   }
 // override for the 'Home' navigation link
@@ -36,7 +37,7 @@ img {
 main {
   @extend .container;
   background-color: #eee;
-  padding-bottom: 80px;
+  padding-bottom: 120px;
   width: 100%;
   margin-top: 51px; // accommodate the navbar
   }
