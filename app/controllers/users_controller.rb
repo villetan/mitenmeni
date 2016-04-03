@@ -23,7 +23,12 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user=User.getUser(params[:id])
+    if(current_user==User.getUser(params[:id]))
+      @user=User.getUser(params[:id])
+    else
+    redirect_to user_url(current_user), notice: "You can not edit other users!"
+    end
+
   end
 
   # POST /users

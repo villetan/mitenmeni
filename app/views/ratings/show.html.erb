@@ -7,7 +7,12 @@
 
 <p>
   <strong>User:</strong>
-  <%= link_to @rating.user.username, @rating.user %>
+  <% if @rating.user_id %>
+      <%= link_to @rating.user.username, @rating.user  %>
+  <% else %>
+    anon
+  <% end %>
+
 </p>
 
-<%= link_to 'Back', ratings_path %>
+<%= link_to 'Back', :back %>
