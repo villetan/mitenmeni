@@ -2,9 +2,9 @@
 
 <div class="col-xs-3">
 <%= form_tag session_path do %>
-    <label>Username: </label> <%= text_field_tag :username, params[:username] %>
+    <label>Username: </label> <%= text_field_tag :username, params[:username], class:"input input-sm" %>
     <br>
-    <label>Password: </label><%= password_field_tag :password, params[:password] %>
+    <label>Password: </label><%= password_field_tag :password, params[:password], class:"input input-sm" %>
     <%= submit_tag "Log in", class:"btn btn-primary btn-sm"%>
 <% end %>
 </div>
