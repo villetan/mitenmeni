@@ -4,25 +4,31 @@
 
 <table class="table table-hover">
   <thead>
-    <tr>
-      <th>Score</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>Score</th>
+    <th>User</th>
+    <th colspan="3"></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @ratings.each do |rating| %>
+  <% @ratings.each do |rating| %>
       <tr>
         <td><%= rating.score %></td>
-        <td><%= link_to  rating.user.username, user_path(rating.user_id) %></td>
-        <td><%= link_to 'Show', rating %></td>
-        <td><%= link_to 'Destroy', rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if rating.user_id %>
+            <td><%= link_to  rating.user.username, user_path(rating.user_id) %></td>
+        <%else%>
+            <td> anon </td>
+        <%end%>
+        <td><%= link_to 'Show', rating, class:"btn btn-default btn-xs" %></td>
+        <% if current_user and  current_user==rating.get_user  %>
+            <td><%= link_to 'Destroy', rating, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger btn-xs" %></td>
+        <% end %>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Rating', new_rating_path %>
+<%= link_to 'New Rating', new_rating_path, class:"btn btn-primary"%>

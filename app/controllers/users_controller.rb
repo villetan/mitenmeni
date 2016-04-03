@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   require 'bcrypt'
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_that_signed_in, only: [:edit, :destroy]
 
   # GET /users
   # GET /users.json

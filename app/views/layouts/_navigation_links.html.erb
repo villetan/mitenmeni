@@ -1,7 +1,7 @@
 <%# add navigation links to this file %>
-<li><%= link_to 'users', users_path%></li>
-<li><%= link_to 'ratings', ratings_path%></li>
-<li><%= link_to 'search',places_path %></li>
+<li><%= link_to 'Users', users_path%></li>
+<li><%= link_to 'Ratings', ratings_path%></li>
+<li><%= link_to 'Search',places_path %></li>
 <% if current_user %>
     <li><%= link_to current_user.username, current_user %></li>
     <li><%= link_to 'Sign out', signout_path, method: :delete%></li>

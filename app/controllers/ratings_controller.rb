@@ -1,5 +1,7 @@
 class RatingsController < ApplicationController
   before_action :set_rating, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_that_signed_in, only:[:edit, :update, :destroy]
+
 
   # GET /ratings
   # GET /ratings.json
@@ -29,7 +31,11 @@ class RatingsController < ApplicationController
 
     respond_to do |format|
       if Rating.validate?(rating_params)
-        Rating.createNew(rating_params)
+        if current_user
+        Rating.createNew(rating_params, current_user.id)
+        else
+        Rating.createNew(rating_params,nil)
+        end
         format.html { redirect_to @rating, notice: 'Rating was successfully created.' }
         format.json { render :show, status: :created, location: @rating }
       else
@@ -62,4 +68,6 @@ class RatingsController < ApplicationController
     def rating_params
       params.require(:rating).permit(:score, :user_id)
     end
+
+
 end
