@@ -9,4 +9,9 @@ class Place
                 :reviews, :nextpagetoken, :events, :utc_offset
 
 
+
+  def self.rendered_fields
+    [ :name,  :types, :formatted_address]
+  end
+
 end

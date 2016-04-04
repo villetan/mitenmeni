@@ -37,6 +37,7 @@ Rails.application.routes.draw do
 
   get 'places', to: 'places#index'
   post 'places', to:'places#search'
+  get 'places/:id', to:'places#show'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

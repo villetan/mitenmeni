@@ -28,13 +28,12 @@ class RatingsController < ApplicationController
   def create
     @rating = Rating.new(rating_params)
 
-
     respond_to do |format|
       if Rating.validate?(rating_params)
         if current_user
-        Rating.createNew(rating_params, current_user.id)
+        Rating.createNew(rating_params, current_user.id, session[:place_id])
         else
-        Rating.createNew(rating_params,nil)
+        Rating.createNew(rating_params,nil, session[:place_id])
         end
         format.html { redirect_to @rating, notice: 'Rating was successfully created.' }
         format.json { render :show, status: :created, location: @rating }
@@ -66,7 +65,7 @@ class RatingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rating_params
-      params.require(:rating).permit(:score, :user_id)
+      params.require(:rating).permit(:score, :user_id, :place_id)
     end
 
 

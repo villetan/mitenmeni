@@ -1,0 +1,46 @@
+
+<p>
+<h1><%= @place.name%></h1>
+</p>
+
+<p>
+  <%= @place.formatted_address%>
+  <br>
+
+
+  <% @ratings.each do |rating| %>
+    <li><%= rating.get_user.username %> </li>
+  <% end %>
+
+</p>
+<p>
+<h2>
+  Arvostele tämä ravintola:
+</h2>
+<p id="notice"><%= notice %></p>
+
+<%= form_for(@rating) do |f| %>
+
+    <% if @rating.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@rating.errors.count, "error") %> prohibited this rating from being saved:</h2>
+
+          <ul>
+            <% @rating.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :score %><br>
+      <%= f.number_field :score %>
+      <% session[:place_id] = params[:id]%>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>
+</p>
