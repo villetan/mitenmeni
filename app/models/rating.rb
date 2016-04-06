@@ -1,6 +1,8 @@
 class Rating < ActiveRecord::Base
   self.table_name="ratings"
 
+
+
   belongs_to :user
 
   validates :score, :numericality => {:greater_than_or_equal_to => 0, :less_than_or_equal_to => 10}
@@ -18,8 +20,8 @@ class Rating < ActiveRecord::Base
     User.find_by_sql(["SELECT * FROM users WHERE user_id=?", self.user]).to_a.first
   end
 
-  def self.validate?(params)
-    params[:score].to_i >= 0 and params[:score].to_i <= 10 and self.get_place
+  def self.validate?(params , place_id)
+    params[:score].to_i >= 0 and params[:score].to_i <= 10 and place_id
   end
 
   def destroyRating
@@ -30,9 +32,13 @@ class Rating < ActiveRecord::Base
     Rating.find_by_sql(["SELECT * FROM ratings WHERE place_id=?", place_id]).to_a
   end
 
+
   def get_place
-    ClientHelper.client_module.spot(self.place_id)
+    PlaceApi.get_place(place_id)
   end
+
+
+
 
 #paskaa!
   private

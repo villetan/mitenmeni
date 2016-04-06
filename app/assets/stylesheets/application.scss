@@ -2,6 +2,7 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "material";
 
 .bg
 {
@@ -10,8 +11,7 @@
 }
 main{
   font-size: 12px;
-  padding-top: 45px;
-
+  margin-top: 5%;
 }
 section{
   font-size: 12px;
@@ -20,5 +20,18 @@ section{
   padding-right: 5px;
 }
 h1{
+  font-family: Roboto;
   font-size: 30px;
+}
+
+.frontpage {
+  padding-top: 240px;
+  padding-bottom: 180px;
+  margin: -52px -15px 0;
+  border-radius: 0!important;
+  background-color: #333;
+  color: #fff;
+  background-image: url(/images/Sloth.jpg);
+  background-position: center center;
+  background-size: cover;
 }

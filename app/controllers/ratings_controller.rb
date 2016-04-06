@@ -29,7 +29,7 @@ class RatingsController < ApplicationController
     @rating = Rating.new(rating_params)
 
     respond_to do |format|
-      if Rating.validate?(rating_params)
+      if Rating.validate?(rating_params, session[:place_id])
         if current_user
         Rating.createNew(rating_params, current_user.id, session[:place_id])
         else

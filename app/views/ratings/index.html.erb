@@ -1,33 +1,32 @@
 
 <h1>Listing Ratings</h1>
 
-<table class="table table-hover">
-  <thead>
-  <tr>
-    <th>Score</th>
-    <th>User</th>
-    <th colspan="3"></th>
-  </tr>
-  </thead>
-
-  <tbody>
+<div class="col-md-6">
+<ul class="demo-list-icon mdl-list">
   <% @ratings.each do |rating| %>
-      <tr>
-        <td><%= rating.score %></td>
-        <% if rating.user_id %>
-            <td><%= link_to  rating.user.username, user_path(rating.user_id) %></td>
-        <%else%>
-            <td> anon </td>
-        <%end%>
-        <td><%= link_to 'Show', rating, class:"btn btn-default btn-xs" %></td>
-        <% if current_user and  current_user==rating.get_user  %>
-            <td><%= link_to 'Destroy', rating, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger btn-xs" %></td>
-        <% end %>
-      </tr>
+
+      <li class="mdl-list__item mdl-list__item--three-line">
+    <span class="mdl-list__item-primary-content">
+      <i class="material-icons mdl-list__item-avatar">person</i>
+      <span><% if rating.user %>
+        <%= link_to rating.user.username, rating.user %>
+      <% else %>
+         Anonymous
+      <% end %></span>
+      <span class="mdl-list__item-text-body">
+         <% if rating.place_id %>
+        <%= rating.get_place.name %>
+      <% end %>
+      </span>
+    </span>
+    <span class="mdl-list__item-secondary-content">
+            <a class="mdl-list__item-secondary-action" href="<%= rating_path(rating) %>"><i class="material-icons">visibility</i></a>
+    </span>
+      </li>
   <% end %>
-  </tbody>
-</table>
-
+</ul>
+<span>
+  <a class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" href="<%= new_rating_path %>"><i class="material-icons">add</i></a>
+</span>
+</div>
 <br>
-
-<%= link_to 'New Rating', new_rating_path, class:"btn btn-primary"%>

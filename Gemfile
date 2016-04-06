@@ -24,6 +24,9 @@ gem 'foursquare2'
 
 gem 'google_places'
 
+gem 'material_design_lite-rails'
+
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
