@@ -15,6 +15,7 @@
       <% @ratings.each do |rating| %>
           <tr>
             <td><%= link_to rating.score, rating_path(rating) %></td>
+            <td><%= link_to rating.get_place.name, places_path+"/"+rating.get_place.place_id%></td>
           </tr>
       <% end %>
       </tbody>

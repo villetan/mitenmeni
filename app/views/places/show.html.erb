@@ -9,7 +9,10 @@
 
 
   <% @ratings.each do |rating| %>
-    <li><%= rating.get_user.username %> </li>
+    <li><%= rating.get_user.username %>
+    <%= rating.score%>
+    </li>
+
   <% end %>
 
 </p>

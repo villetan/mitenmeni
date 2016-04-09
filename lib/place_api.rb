@@ -7,6 +7,10 @@ module PlaceApi
     @client.spot(place_id)
   end
 
+  def self.search_place(searchword, type)
+    @client.spots_by_query(searchword +" suomi", :types => type, :language=>'fi' )
+  end
+
   def self.key
     ENV["GMAPS_KEY"]
   end

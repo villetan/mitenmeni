@@ -2,10 +2,14 @@
 
 <%= form_tag places_path do %>
     City <%= text_field_tag :city, params[:city], class:"input input-sm" %>
+    Type
+    <%= select_tag(:type, options_from_collection_for_select(@types, :to_s, lambda{|str| str.sub('_',' ').capitalize }, session[:last_search]))%>
     <%= submit_tag "Search", class:"btn btn-default" %>
+
 <% end %>
 
-<% if @places %>
+<% if @places  %>
+
     <table class="table table-hover">
       <thead>
       <tr>
@@ -20,12 +24,21 @@
           <tr>
 
             <td><%=link_to place.name, places_path.to_s+"/"+place.place_id %></td>
-            <td><%=place.types %></td>
+            <td> <%place.types.each do |type| %>
+                  <%=link_to type.capitalize.gsub('_', ' '), places_path(city: params[:city], type: type), method: :post %>,
+              <% end %>
+            </td>
             <td><%=place.formatted_address %></td>
       <% end %>
       </tr>
       </tbody>
     </table>
+
+
+<% end %>
+
+<% if @places and @places.size==0%>
+<p>Haullasi ei löytynyt yhtään osumaa!</p>
 <% end %>
 
 
