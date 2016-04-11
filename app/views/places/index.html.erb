@@ -1,20 +1,27 @@
 <h1>Search places </h1>
 
 <%= form_tag places_path do %>
-    City <%= text_field_tag :city, params[:city], class:"input input-sm" %>
-    Type
-    <%= select_tag(:type, options_from_collection_for_select(@types, :to_s, lambda{|str| str.sub('_',' ').capitalize }, session[:last_search]))%>
-    <%= submit_tag "Search", class:"btn btn-default" %>
+    <div class="col-xs-3">
+       City:<%= text_field_tag :city, params[:city], class:"input input-sm" %>
+    </div>
+    <div class="col-xs-3">
+      Type:
+      <%= select_tag(:type,  options_from_collection_for_select(@types, :to_s, lambda{|str| str.sub('_',' ').capitalize }, session[:last_search]), class:"form-control input-sm col-xs-2")%>
+    </div>
+    <br>
+    <div class="col-xs-3"><%= submit_tag "Search", class:"btn btn-default" %>
+    </div>
 
 <% end %>
 
-<% if @places  %>
+<% if @places and @places.size>0  %>
+
 
     <table class="table table-hover">
       <thead>
       <tr>
         <% Place.rendered_fields.each do |field| %>
-            <th> <%= field %></th>
+            <th> <%= field.to_s.capitalize.gsub('_', ' ')  %></th>
         <% end %>
       </tr>
       </thead>
@@ -36,9 +43,10 @@
 
 
 <% end %>
-
+<br>
+<br>
 <% if @places and @places.size==0%>
-<p>Haullasi ei löytynyt yhtään osumaa!</p>
+    <p class="col-xs-5">Haullasi ei löytynyt yhtään osumaa!</p>
 <% end %>
 
 

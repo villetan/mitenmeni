@@ -32,6 +32,10 @@ class Rating < ActiveRecord::Base
     Rating.find_by_sql(["SELECT * FROM ratings WHERE place_id=?", place_id]).to_a
   end
 
+  def get_user
+    User.find_by_sql(["SELECT * FROM users WHERE user_id=?", self.user_id]).to_a.first
+  end
+
 
   def get_place
     PlaceApi.get_place(place_id)
