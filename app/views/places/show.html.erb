@@ -9,11 +9,35 @@
 
 
   <% @ratings.each do |rating| %>
-    <li><%= rating.get_user.username %>
-    <%= rating.score%>
-    </li>
+    <ul class="demo-list-three mdl-list">
+      <li class="mdl-list__item mdl-list__item--three-line">
+        <span class="mdl-list__item-primary-content">
+          <i class="material-icons mdl-list__item-avatar">person</i>
+          <span>
+            <%if rating.get_user%>
+          <%= rating.get_user.username %>
+      <%else%>
+          ANON
+                <%end%>
+          </span>
+          <span class="mdl-list__item-text-body">
+            <% if rating.comment %>
+            <%=rating.comment%>
+            <% else %>
+            no comment
+            <% end %>
+           </span>
+          <%= rating.score%>
+          </span>
+         <span class="mdl-list__item-secondary-content">
 
-  <% end %>
+        <i>Score: <%=rating.score%></i>
+    </span>
+      </li>
+
+    </ul>
+
+<% end %>
 
 </p>
 <p>
@@ -36,10 +60,15 @@
         </div>
     <% end %>
 
-    <div class="field">
+    <div class="field col-8">
       <%= f.label :score %><br>
       <%= f.number_field :score %>
-      <% session[:place_id] = params[:id]%>
+      <br>
+      <%= f.label :comment %>
+      <br>
+      <%= f.text_area :comment, cols:"100", rows:"5"%>
+      <%= f.hidden_field :place_id, :value => @place.place_id %>
+
     </div>
 
     <div class="actions">

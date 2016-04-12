@@ -12,16 +12,16 @@ class Rating < ActiveRecord::Base
     Rating.find_by_sql(["SELECT * FROM ratings"]).to_a
   end
 
-  def self.createNew(params, id,place_id)
-    Rating.find_by_sql(["INSERT  INTO ratings (score, user_id, place_id) VALUES (?,?,?)", params[:score].to_i, id, place_id])
+  def self.createNew(params, id)
+    Rating.find_by_sql(["INSERT  INTO ratings (score, user_id, place_id, comment) VALUES (?,?,?,?)", params[:score].to_i, id, params[:place_id], params[:comment]])
   end
 
   def get_user
     User.find_by_sql(["SELECT * FROM users WHERE user_id=?", self.user]).to_a.first
   end
 
-  def self.validate?(params , place_id)
-    params[:score].to_i >= 0 and params[:score].to_i <= 10 and place_id
+  def self.validate?(params )
+    params[:score].to_i >= 0 and params[:score].to_i <= 10 and params[:place_id]
   end
 
   def destroyRating

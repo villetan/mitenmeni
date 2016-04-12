@@ -18,4 +18,12 @@
   <%= link_to @rating.get_place.name, places_path+"/"+@rating.get_place.place_id%>
 </p>
 
+<% if @rating.comment%>
+<p>
+<strong>Comment:</strong>
+  <br>
+  <%=@rating.comment%>
+</p>
+
 <%= link_to 'Back', :back %>
+<% end %>

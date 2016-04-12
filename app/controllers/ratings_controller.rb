@@ -27,20 +27,20 @@ class RatingsController < ApplicationController
   # POST /ratings.json
   def create
     @rating = Rating.new(rating_params)
-
+byebug
     respond_to do |format|
-      if Rating.validate?(rating_params, session[:place_id])
+      if Rating.validate?(rating_params)
         if current_user
-        Rating.createNew(rating_params, current_user.id, session[:place_id])
+        Rating.createNew(rating_params, current_user.id)
         else
-        Rating.createNew(rating_params,nil, session[:place_id])
+        Rating.createNew(rating_params,nil)
         end
         format.html { redirect_to @rating, notice: 'Rating was successfully created.' }
         format.json { render :show, status: :created, location: @rating }
       else
       format.html { redirect_to :back, notice: 'Valitsit väärät parametrit' }
       end
-
+    session[:place_id]=nil
     end
 
   end
@@ -65,7 +65,7 @@ class RatingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rating_params
-      params.require(:rating).permit(:score, :user_id, :place_id)
+      params.require(:rating).permit(:score, :user_id, :place_id, :comment)
     end
 
 
