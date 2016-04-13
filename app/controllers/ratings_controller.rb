@@ -27,7 +27,6 @@ class RatingsController < ApplicationController
   # POST /ratings.json
   def create
     @rating = Rating.new(rating_params)
-byebug
     respond_to do |format|
       if Rating.validate?(rating_params)
         if current_user

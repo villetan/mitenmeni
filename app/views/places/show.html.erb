@@ -15,14 +15,18 @@
           <i class="material-icons mdl-list__item-avatar">person</i>
           <span>
             <%if rating.get_user%>
-          <%= rating.get_user.username %>
+          <%=link_to rating.get_user.username, rating.get_user %>
       <%else%>
           ANON
                 <%end%>
           </span>
           <span class="mdl-list__item-text-body">
             <% if rating.comment %>
-            <%=rating.comment%>
+                <%if rating.comment.length>50%>
+            <%=rating.comment[0...50]+"..."%>
+                    <%else%>
+                <% rating.comment%>
+                <%end%>
             <% else %>
             no comment
             <% end %>
@@ -31,7 +35,7 @@
           </span>
          <span class="mdl-list__item-secondary-content">
 
-        <i>Score: <%=rating.score%></i>
+        <i><%= link_to "Score: #{rating.score}", rating%></i>
     </span>
       </li>
 
