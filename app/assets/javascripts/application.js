@@ -11,8 +11,14 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
-//= require turbolinks
 //= require bootstrap-sprockets
 //= require material
 //= require_tree .
+
+function toggleDisabled(_checked) {
+    document.getElementById('city').disabled = _checked ? true : false;
+    document.getElementById('city').value = ""
+
+}

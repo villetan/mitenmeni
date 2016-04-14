@@ -9,6 +9,11 @@ module PlaceApi
 
   def self.search_place(searchword, type)
     @client.spots_by_query(searchword +" suomi", :types => type, :language=>'fi' )
+
+  end
+
+  def self. search_by_coordinates(lat, lng)
+    @client.spots(lat,lng, :language=>'fi', :radius => '20000')
   end
 
   def self.key

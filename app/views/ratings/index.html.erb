@@ -12,7 +12,7 @@
 
 
         <% if rating.place_id %>
-        <%= rating.get_place.name %>
+        <%= link_to rating.get_place.name, places_path+"/"+rating.get_place.place_id %>
       <% end %>
       </span>
       <span class="mdl-list__item-text-body">

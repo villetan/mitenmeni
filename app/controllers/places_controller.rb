@@ -4,15 +4,21 @@ class PlacesController < ApplicationController
 
 
   def index
-types
+    types
   end
 
   def search
-    places=PlaceApi.search_place(params[:city], params[:type])
+    if params[:city]
+      places=PlaceApi.search_place(params[:city], params[:type])
+      @places=places.uniq{|p| p.place_id}
+    else if params[:my_place][:checked].equal? "1"
+           ##geolocation
+         end
+    end
+
     #places=client.spots_by_query(params[:city]+" suomi", :types=>['restaurant', 'bar'], :language => 'fi')
     session[:last_search]=params[:type]
     types
-    @places=places.uniq{|p| p.place_id}
     render :index
   end
 
