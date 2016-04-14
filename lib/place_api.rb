@@ -12,8 +12,8 @@ module PlaceApi
 
   end
 
-  def self. search_by_coordinates(lat, lng)
-    @client.spots(lat,lng, :language=>'fi', :radius => '20000')
+  def self. search_by_coordinates(lat, lng, type)
+    @client.spots(lat,lng, :language=>'fi', :types => type, :radius => '10000')
   end
 
   def self.key

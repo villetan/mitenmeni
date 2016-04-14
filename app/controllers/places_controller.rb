@@ -8,11 +8,21 @@ class PlacesController < ApplicationController
   end
 
   def search
+
     if params[:city]
       places=PlaceApi.search_place(params[:city], params[:type])
       @places=places.uniq{|p| p.place_id}
-    else if params[:my_place][:checked].equal? "1"
-           ##geolocation
+    else if params[:my_place][:checked].to_i==1
+           #geolocation
+           loc=Geocoder.search(request.remote_ip).first.data["loc"]
+           #loc=Geocoder.search("88.192.41.150").first.data["loc"]
+           splitted=loc.split(",")
+           lat=splitted.first
+           lng=splitted.second
+           places=PlaceApi.search_by_coordinates(lat, lng, params[:type])
+           places=PlaceApi.search_by_coordinates(lat, lng, params[:type])
+           @places=places.uniq{|p| p.place_id}
+           byebug
          end
     end
 
