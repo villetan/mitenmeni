@@ -22,7 +22,6 @@ class PlacesController < ApplicationController
            places=PlaceApi.search_by_coordinates(lat, lng, params[:type])
            places=PlaceApi.search_by_coordinates(lat, lng, params[:type])
            @places=places.uniq{|p| p.place_id}
-           byebug
          end
     end
 
