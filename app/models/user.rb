@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
   self.table_name="users"
 
   validates :username, uniqueness: true, length: {minimum: 3}
+  validates :password_encrypted, presence: true;
+  validates :password_salt, presence: true;
+
   #has_secure_password
 
 

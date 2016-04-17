@@ -1,6 +1,6 @@
 class FrontpageController < ApplicationController
   def index
-    @lol = Geocoder.search("88.192.41.150").first.data["loc"]
+    @lol = Geocoder.search("128.214.138.171").first.data["loc"]
 
   end
 

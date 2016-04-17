@@ -13,13 +13,22 @@ class PlacesController < ApplicationController
       places=PlaceApi.search_place(params[:city], params[:type])
       @places=places.uniq{|p| p.place_id}
     else if params[:my_place][:checked].to_i==1
+           if Rails.env.development? or Rails.env.test?
            #geolocation
-           loc=Geocoder.search(request.remote_ip).first.data["loc"]
-           #loc=Geocoder.search("88.192.41.150").first.data["loc"]
+
+           #hima
+           loc=Geocoder.search("88.192.41.150").first.data["loc"]
+           #yo
+           #loc=Geocoder.search("128.214.138.171").first.data["loc"]
+           #new york
+           #loc=Geocoder.search("72.229.28.185").first.data["loc"]
+
+           elsif Rails.env.production?
+             loc=Geocoder.search(request.remote_ip).first.data["loc"]
+           end
            splitted=loc.split(",")
            lat=splitted.first
            lng=splitted.second
-           places=PlaceApi.search_by_coordinates(lat, lng, params[:type])
            places=PlaceApi.search_by_coordinates(lat, lng, params[:type])
            @places=places.uniq{|p| p.place_id}
          end
