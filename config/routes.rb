@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   get 'places', to: 'places#index'
   post 'places', to:'places#search'
   get 'places/:id', to:'places#show'
+  get 'redirect_from_ratings', to: 'ratings#redirect_from_ratings'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

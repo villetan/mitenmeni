@@ -19,6 +19,10 @@ class RatingsController < ApplicationController
     @rating = Rating.new
   end
 
+  def redirect_from_ratings
+  redirect_to places_path, notice:"Etsi haluamasi paikka ja anna sille arvio!"
+  end
+
 #   GET /ratings/1/edit
 #  def edit
 #  end
