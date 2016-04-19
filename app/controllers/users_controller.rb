@@ -14,6 +14,10 @@ class UsersController < ApplicationController
   def show
     @user=User.getUser(params[:id])
     @ratings = @user.getRatings
+    if current_user==@user
+    @requests=Friendship.get_pending_requests(current_user)
+    end
+
   end
 
   # GET /users/new

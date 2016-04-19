@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+
+  resources :friendships
+  get 'accept_request', to: 'friendships#accept_request'
   get 'amenities/index'
 
   get 'amenities/show'

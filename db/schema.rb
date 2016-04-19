@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160412122657) do
+ActiveRecord::Schema.define(version: 20160419120830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,12 @@ ActiveRecord::Schema.define(version: 20160412122657) do
     t.string  "name", limit: 200, null: false
     t.decimal "lat"
     t.decimal "lng"
+  end
+
+  create_table "friendships", primary_key: "friendship_id", force: :cascade do |t|
+    t.integer "friend_a_id"
+    t.integer "friend_b_id"
+    t.string  "status",      limit: 20, null: false
   end
 
   create_table "ratings", primary_key: "rating_id", force: :cascade do |t|
@@ -37,5 +43,7 @@ ActiveRecord::Schema.define(version: 20160412122657) do
 
   add_index "users", ["username"], name: "users_username_key", unique: true, using: :btree
 
+  add_foreign_key "friendships", "users", column: "friend_a_id", primary_key: "user_id", name: "friendship_friend_a_id_fkey"
+  add_foreign_key "friendships", "users", column: "friend_b_id", primary_key: "user_id", name: "friendship_friend_b_id_fkey"
   add_foreign_key "ratings", "users", primary_key: "user_id", name: "ratings_user_id_fkey"
 end
