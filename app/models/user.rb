@@ -49,4 +49,9 @@ class User < ActiveRecord::Base
     user and user.password_encrypted == BCrypt::Engine.hash_secret(password, user.password_salt)
   end
 
+  def get_friends
+    User.find_by_sql(["SELECT * FROM users WHERE user_id IN (
+          SELECT friend_a_id FROM friendships WHERE friend_b_id=? AND status NOT LIKE 'pending')", self.id]).to_a
+  end
+
 end

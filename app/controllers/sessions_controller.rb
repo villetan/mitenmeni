@@ -20,7 +20,6 @@ class SessionsController < ApplicationController
     # nollataan sessio
     user=current_user
     session[:user_id] = nil
-    # uudelleenohjataan sovellus pääsivulle
-    redirect_to :root, notice: "#{user.username} logged out."
+    redirect_to signin_path, notice: "#{user.username} logged out."
   end
 end
