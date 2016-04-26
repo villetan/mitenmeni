@@ -29,6 +29,12 @@ class Friendship < ActiveRecord::Base
     Friendship.find_by_sql(["INSERT  INTO friendships (friend_a_id, friend_b_id, status) VALUES (?,?,?)",b,a, "friend"])
   end
 
+  def self.delete(friend_a_id, friend_b_id)
+    Friendship.find_by_sql(["DELETE FROM friendships where friend_a_id=? AND friend_b_id=?", friend_a_id, friend_b_id])
+    Friendship.find_by_sql(["DELETE FROM friendships where friend_a_id=? AND friend_b_id=?", friend_b_id, friend_a_id])
+
+  end
+
 
 
 

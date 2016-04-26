@@ -67,6 +67,9 @@
       <i class="material-icons mdl-list__item-avatar ">person</i>
       <%= link_to User.getUser(friend.id).username, user_path(friend.id) %>
       </span>
+              <span class="mdl-list__item-secondary-content">
+                    <a class="mdl-list__item-secondary-action" href="<%= delete_friendship_path(:friend_a_id=>friend.id) %>"><i class="material-icons">clear</i></a>
+                </span>
 
             </li>
         <%end%>

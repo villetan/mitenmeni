@@ -29,6 +29,11 @@ class FriendshipsController < ApplicationController
   def edit
   end
 
+  def delete_friendship
+    Friendship.delete(current_user.id, params["friend_a_id"])
+    redirect_to :back
+  end
+
   # POST /friendships
   # POST /friendships.json
   def create
@@ -62,7 +67,7 @@ class FriendshipsController < ApplicationController
   # DELETE /friendships/1
   # DELETE /friendships/1.json
   def destroy
-    @friendship.destroy
+    Friendship.delete(current_user, params["delete_friend_id"])
     respond_to do |format|
       format.html { redirect_to friendships_url, notice: 'Friendship was successfully destroyed.' }
       format.json { head :no_content }
@@ -70,13 +75,13 @@ class FriendshipsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_friendship
-      @friendship = Friendship.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_friendship
+    @friendship = Friendship.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def friendship_params
-      params.require(:friendship).permit(:friend_a_id, :friend_b_id, :status)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def friendship_params
+    params.require(:friendship).permit(:friend_a_id, :friend_b_id, :status)
+  end
 end

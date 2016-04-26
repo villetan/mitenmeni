@@ -15,12 +15,19 @@ class User < ActiveRecord::Base
 
   def self.createNew(params, password_encrypted, password_salt)
 
-    User.find_by_sql(["INSERT INTO users (username, password_encrypted, password_salt) VALUES(?,?,?)", params[:username], password_encrypted, password_salt]).to_a
+    User.find_by_sql(["INSERT INTO users (username, password_encrypted, password_salt) VALUES(?,?,?)", params["username"], password_encrypted, password_salt]).to_a
   end
 
   def self.validate?(params)
-    params["username"] and params["username"].length>3  and params["password"]==params["password_confirmation"]
+    params["username"] and params["username"].length>3  and params["password"]==params["password_confirmation"] and not User.getAll.map(&:username).include? params["username"]
 
+  end
+
+  def self.validate_edit?(params)
+
+    user=User.getUserByUsername(params["username"])
+
+    user and params["username"] and params["username"].length>3  and params["password"]==params["password_confirmation"] and user.password_encrypted == BCrypt::Engine.hash_secret(params["old_password"], user.password_salt)
   end
 
   def self.getUser(id)
@@ -36,8 +43,8 @@ class User < ActiveRecord::Base
     User.find_by_sql(["DELETE FROM users WHERE user_id=?", self.id])
   end
 
-  def updateUser(params)
-    User.find_by_sql(["UPDATE users SET username=? WHERE user_id=?", params[:username], self.id])
+  def updateUser(password_encrypted, password_salt)
+    User.find_by_sql(["UPDATE users SET password_encrypted=(?), password_salt=(?) WHERE user_id=(?)", password_encrypted, password_salt, self.id])
   end
 
   def getRatings

@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   resources :friendships
   get 'accept_request', to: 'friendships#accept_request'
+  get 'delete_friendship', to: 'friendships#delete_friendship'
+
   get 'amenities/index'
 
   get 'amenities/show'
