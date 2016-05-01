@@ -70,5 +70,7 @@ end
 group :test do
   gem 'factory_girl_rails'
   gem 'simplecov', require: false
+  gem 'capybara'
+  gem 'launchy'
 end
 

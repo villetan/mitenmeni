@@ -27,7 +27,7 @@
 <%end%>
 <p class="col-xs-3">
 <% if current_user==@user %>
-    <%= link_to 'Edit', edit_user_path(@user), class:"btn btn-warning btn-xs" %>
+    <%= link_to 'Edit', edit_user_path(@user), class:"btn btn-warning btn-xs", id:"edit" %>
 <% end %>
 <%= link_to 'Back to all users', users_path, class:"btn btn-default btn-xs" %>
   </p>
@@ -35,7 +35,7 @@
 <p class="col-xs-3">
 <% if current_user%>
     <% if  current_user.id != @user.id and not @user_friends.map(&:user_id).include? current_user.user_id %>
-        <%= link_to "Add #{@user.username} as friend", friendships_path(:friendship => {friend_a_id: current_user.id, friend_b_id: @user.id, status:"pending"}), method: :post %>
+        <%= link_to "Add #{@user.username} as a friend", friendships_path(:friendship => {friend_a_id: current_user.id, friend_b_id: @user.id, status:"pending"}), method: :post %>
     <% end %>
     <% if current_user==@user  %>
         <% if @requests.size >0%>

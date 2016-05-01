@@ -7,11 +7,27 @@ FactoryGirl.define do
     password_salt "kissa"
   end
 
+
+
+  factory :user2, class: User do
+    username "Lauri"
+    password_encrypted "apina"
+    password_salt "apina"
+  end
+
+
+
   factory :rating do
     score 9
     comment "moi"
     place_id "asdffeqasd"
   end
 
+
+  factory :rating2, class: Rating do
+    score 1
+    comment "kakkonen"
+    place_id "salapaikka"
+  end
 
 end

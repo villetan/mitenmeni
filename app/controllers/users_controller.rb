@@ -40,7 +40,6 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    byebug
     respond_to do |format|
       if User.validate?(user_params)
         password_salt = BCrypt::Engine.generate_salt
@@ -52,8 +51,11 @@ class UsersController < ApplicationController
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        if(user_params[:password]!=user_params[:password_confirmation])
+          format.html { redirect_to signup_path, notice: "Password mismatch!" }
+        else
+          format.html { redirect_to signup_path, notice: "Username taken!" }
+        end
       end
     end
   end
@@ -71,10 +73,10 @@ class UsersController < ApplicationController
         format.json { render :show, status: :ok, location: @user }
       else
         if user_params["password"]!= user_params["password_confirmation"]
-          format.html { redirect_to edit_user_path(@user), notice: "Password mistmatch!"}
+          format.html { redirect_to edit_user_path(@user), notice: "Password mismatch!"}
         end
-        if user_params["password_confirmation"].nil? or user_params["password"].nil? or user_params["old_password"].nil?
-          format.html { redirect_to edit_user_path(@user), notice: "Fields cannot be empty!"}
+        if user_params["password_confirmation"].nil? or user_params["password"].nil? or user_params["old_password"].nil? or user_params["password_confirmation"].length<=2 or user_params["password"].length<=2 or user_params["old_password"].length<=2
+          format.html { redirect_to edit_user_path(@user), notice: "Too short password!"}
         else
           format.html { redirect_to edit_user_path(@user), notice: "Old password not correct!"}
         end

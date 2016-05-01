@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   end
 
   def self.validate?(params)
-    params["username"] and params["username"].length>3  and params["password"]==params["password_confirmation"] and not User.getAll.map(&:username).include? params["username"]
+    params["password"].length>2 and params["username"] and params["username"].length>3  and params["password"]==params["password_confirmation"] and not User.getAll.map(&:username).include? params["username"]
 
   end
 
@@ -27,7 +27,8 @@ class User < ActiveRecord::Base
 
     user=User.getUserByUsername(params["username"])
 
-    user and params["username"] and params["username"].length>3  and params["password"]==params["password_confirmation"] and user.password_encrypted == BCrypt::Engine.hash_secret(params["old_password"], user.password_salt)
+    params["password"].length>2 and user and params["username"] and params["username"].length>3  and params["password"]==params["password_confirmation"] and user.password_encrypted == BCrypt::Engine.hash_secret(params["old_password"], user.password_salt)
+
   end
 
   def self.getUser(id)

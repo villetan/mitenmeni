@@ -11,16 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160419120830) do
+ActiveRecord::Schema.define(version: 20160501151523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "amenity", primary_key: "amenity_id", force: :cascade do |t|
-    t.string  "name", limit: 200, null: false
-    t.decimal "lat"
-    t.decimal "lng"
-  end
 
   create_table "friendships", primary_key: "friendship_id", force: :cascade do |t|
     t.integer "friend_a_id"

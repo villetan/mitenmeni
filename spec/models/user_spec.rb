@@ -12,7 +12,6 @@ RSpec.describe User, type: :model do
 
   it "is not saved without a password" do
     user = User.create username:"Pekka"
-
     expect(user).not_to be_valid
     expect(User.count).to eq(0)
   end
@@ -108,6 +107,18 @@ RSpec.describe User, type: :model do
     expect(user.authenticate?(user.username, "Kalle1")).to be(true)
     expect(user.authenticate?(user.username, "Kallaasdasde1")).to be(false)
 
+  end
+
+  it "has validator for edit" do
+
+    params={"username" => "Pekka", "password" => "kissa", "password_confirmation" => "kissa"}
+    password_salt = BCrypt::Engine.generate_salt
+    password_encrypted = BCrypt::Engine.hash_secret("kissa", password_salt)
+    User.createNew(params, password_encrypted, password_salt)
+    user=User.first
+    params={"username" => "Pekka", "password" => "Apina", "password_confirmation" => "Apina", "old_password"=>"kissa"}
+    User.validate_edit?(params)
+    expect(User.validate_edit?(params)).to be(true)
   end
 
 

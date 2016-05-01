@@ -42,7 +42,7 @@ class FriendshipsController < ApplicationController
     respond_to do |format|
       if Friendship.validate?(friendship_params)
         Friendship.send_invitation(friendship_params)
-        format.html { redirect_to @friendship, notice: 'Friendship was successfully created.' }
+        format.html { redirect_to users_path, notice: 'Friend request sended!' }
         format.json { render :show, status: :created, location: @friendship }
       else
         format.html { redirect_to :back, notice: 'Ystäväpyyntö odottaa/lähetetty' }
