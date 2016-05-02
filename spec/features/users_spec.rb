@@ -40,12 +40,21 @@ describe "User" do
 
   describe "who has signed up" do
 
+
+
     it "can signin with right credentials" do
       sign_in("Kalle","Kalle1")
 
       expect(page).to have_content 'Welcome back!'
       expect(page).to have_content 'Ratings by: Kalle'
     end
+
+    it "cannot sign in with wrong credentials" do
+      sign_in("Kalle", "Kalle2")
+      expect(page).to have_content("Username and password do not match")
+    end
+
+
 
     it "must insert the credentials to edit his pw" do
       sign_in("Kalle","Kalle1")
@@ -61,7 +70,6 @@ describe "User" do
       fill_in('user_password_confirmation', with: "")
       click_button('Submit')
       expect(page).to have_content("Too short password!")
-      save_and_open_page
 
     end
 
@@ -79,6 +87,14 @@ describe "User" do
       expect(page).to have_content("Ratings by: Kalle")
       expect(page).to have_content("No ratings yet!")
 
+    end
+
+    it "can delete his own account" do
+      sign_in("Kalle","Kalle1")
+      click_link('edit')
+      click_link("Delete user Kalle")
+      expect(page).to have_content("User was successfully destroyed.")
+      expect(User.count).to eq(0)
     end
 
 
@@ -113,7 +129,7 @@ describe "User" do
       expect(Friendship.count).to eq(0)
     end
 
-    it ""
+
 
 
 

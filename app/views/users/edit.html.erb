@@ -20,7 +20,11 @@
       <%= f.password_field :password_confirmation, class:"mdl-textfield__input"  %>
     </div>
     <div class="actions">
-      <%= submit_tag "Submit", class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" %>  </div>
+      <%= submit_tag "Submit", class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" %>
+      <%if current_user and @user==current_user%>
+      <%= link_to "Delete user #{@user.username}",user_path(current_user), class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent", method: :delete, data: { confirm: 'User will be permanently deleted' } %>
+          </div>
+        <%end%>
 <% end %>
 
 

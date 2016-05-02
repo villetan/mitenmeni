@@ -1,6 +1,6 @@
 class FrontpageController < ApplicationController
-  def index
 
+  def index
   end
 
 

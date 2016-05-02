@@ -5,6 +5,7 @@
     <title><%= content_for?(:title) ? yield(:title) : "Mitenmeni" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Mitenmeni" %>">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag "frontpage" if controller_name == "frontpage" %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag "https://fonts.googleapis.com/icon?family=Material+Icons" %>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">

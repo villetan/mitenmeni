@@ -12,7 +12,7 @@ class PlacesController < ApplicationController
     if params[:city]
       places=PlaceApi.search_place(params[:city], params[:type])
       @places=places.uniq{|p| p.place_id}
-    else if params[:my_place][:checked].to_i==1
+    elsif params[:my_place][:checked].to_i==1
            if Rails.env.development? or Rails.env.test?
            #geolocation
 
@@ -32,7 +32,8 @@ class PlacesController < ApplicationController
            places=PlaceApi.search_by_coordinates(lat, lng, params[:type])
            @places=places.uniq{|p| p.place_id}
          end
-    end
+
+
 
     #places=client.spots_by_query(params[:city]+" suomi", :types=>['restaurant', 'bar'], :language => 'fi')
     session[:last_search]=params[:type]
