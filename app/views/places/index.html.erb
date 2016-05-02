@@ -2,7 +2,9 @@
 
 <%= form_tag places_path do %>
     <div class="col-xs-3">
-       City:<%= text_field_tag :city, params[:city], class:"input input-sm" %>
+       City:
+      <br>
+      <%= text_field_tag :city, params[:city], class:"input input-sm" %>
     </div>
 
     <div class="col-xs-3">

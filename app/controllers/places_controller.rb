@@ -12,7 +12,8 @@ class PlacesController < ApplicationController
     if params[:city]
       places=PlaceApi.search_place(params[:city], params[:type])
       @places=places.uniq{|p| p.place_id}
-    elsif params[:my_place][:checked].to_i==1
+    else
+      #jos city tyhjä, niin my location
            if Rails.env.development? or Rails.env.test?
            #geolocation
 
