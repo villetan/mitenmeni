@@ -1,28 +1,34 @@
 <h1>Search places </h1>
 
 <%= form_tag places_path do %>
-    <div class="col-xs-3">
-       City:
+
+    <div class="col-sm-3 ">
+      <div class="row">
+      City:
       <br>
       <%= text_field_tag :city, params[:city], class:"input input-sm" %>
     </div>
-
-    <div class="col-xs-3">
+    </div>
+    <div class="row>">
+    <div class="col-sm-3 ">
       <br>
       <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="my_place_checked">
-      <%= check_box "my_place", :checked, class:"mdl-checkbox__input", onchange:"toggleDisabled(this.checked)" %>
+        <%= check_box "my_place", :checked, class:"mdl-checkbox__input", onchange:"toggleDisabled(this.checked)" %>
         <span class="mdl-checkbox__label">My location</span>
-        </label>
+      </label>
     </div>
-
-    <div class="col-xs-3">
+      </div>
+    <div class="row>">
+    <div class="col-sm-3 ">
       Type:
-      <%= select_tag(:type,  options_from_collection_for_select(@types, :to_s, lambda{|str| str.sub('_',' ').capitalize }, session[:last_search]), class:"form-control input-sm col-xs-2")%>
+      <%= select_tag(:type,  options_from_collection_for_select(@types, :to_s, lambda{|str| str.sub('_',' ').capitalize }, session[:last_search]), class:"form-control input-sm ")%>
     </div>
+      </div>
     <br>
-    <div class="col-xs-3"><%= submit_tag "Search", class:"btn btn-default" %>
+    <div class="row>">
+    <div class="col-sm-3 "><%= submit_tag "Search", class:"btn btn-default" %>
     </div>
-
+      </div>
 <% end %>
 
 <% if @places and @places.size>0  %>
