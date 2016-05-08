@@ -26,6 +26,12 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def lock_account
+    @user=User.getUser(params[:id])
+    @user.freeze_account
+    redirect_to @user
+  end
+
   # GET /users/1/edit
   def edit
     if(current_user==User.getUser(params[:id]))

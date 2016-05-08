@@ -62,4 +62,8 @@ class User < ActiveRecord::Base
           SELECT friend_a_id FROM friendships WHERE friend_b_id=? AND status NOT LIKE 'pending')", self.id]).to_a
   end
 
+  def freeze_account
+    User.find_by_sql(["UPDATE users SET locked=NOT locked WHERE user_id=?",  self.id])
+  end
+
 end

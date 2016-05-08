@@ -1,7 +1,11 @@
 
-<h2>Ratings by: <%= @user.username%></h2>
+<h2>Ratings by: <%= @user.username%>
+  <% if current_user and current_user.admin and @user.locked %>
+      USER LOCKED
+  <%end%>
+</h2>
 <p class="col-xs-3">
-<% if @ratings.size>0 %>
+  <% if @ratings.size>0 %>
     <table class="table table-hover">
       <thead>
       <tr>
@@ -26,23 +30,30 @@
     <br>
 <%end%>
 <p>
-<% if current_user==@user %>
-    <%= link_to 'Edit', edit_user_path(@user), class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent", id:"edit" %>
-<% end %>
-  <% if current_user %>
-  <% if  current_user.id != @user.id and not @user_friends.map(&:user_id).include? current_user.user_id %>
-      <%= link_to "Add #{@user.username} as a friend", friendships_path(:friendship => {friend_a_id: current_user.id, friend_b_id: @user.id, status:"pending"}), method: :post, class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"  %>
+  <% if current_user==@user %>
+      <%= link_to 'Edit', edit_user_path(@user), class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent", id:"edit" %>
   <% end %>
+  <% if current_user %>
+      <% if  current_user.id != @user.id and not @user_friends.map(&:user_id).include? current_user.user_id %>
+          <%= link_to "Add #{@user.username} as a friend", friendships_path(:friendship => {friend_a_id: current_user.id, friend_b_id: @user.id, status:"pending"}), method: :post, class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"  %>
+      <% end %>
+      <% if current_user.admin and not @user.admin %>
+          <%if not @user.locked%>
+              <%= link_to "Lock #{@user.username}'s account", lock_account_path(:id => @user.id), method: :post%>
+          <%else%>
+              <%= link_to "Unlock #{@user.username}'s account", lock_account_path(:id => @user.id), method: :post%>
+          <%end%>
       <%end%>
-<%= link_to 'Back to all users', users_path, class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"%>
-  </p>
+  <%end%>
+  <%= link_to 'Back to all users', users_path, class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"%>
+</p>
 <br>
 <br>
 <p class="col-xs-3">
-<% if current_user%>
+  <% if current_user%>
 
-    <% if current_user==@user  %>
-        <% if @requests.size >0%>
+      <% if current_user==@user  %>
+          <% if @requests.size >0%>
             <h3>Pending requests:</h3>
 
             <ul class="demo-list-icon mdl-list">
@@ -60,11 +71,11 @@
         <% end %>
         </ul>
     <%end%>
-</p>
+    </p>
     <br>
     <p class="col-xs-3">
       <% if @user_friends.size>0 %>
-          <h3>Friends</h3>
+        <h3>Friends</h3>
         <% @user_friends.each do |friend| %>
             <li class="mdl-list__item">
     <span class="mdl-list__item-primary-content">
@@ -78,6 +89,6 @@
             </li>
         <%end%>
 
-      <%end%>
+    <%end%>
     </p>
 <% end %>

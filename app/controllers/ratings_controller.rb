@@ -48,6 +48,25 @@ class RatingsController < ApplicationController
 
   end
 
+  def update
+
+      @rating=Rating.get_rating(params[:id])
+    if current_user and current_user==User.getUser(@rating.user_id)
+      respond_to do |format|
+        if Rating.validate_edit?(rating_params)
+            @rating.update_rating(rating_params, @rating.id)
+            format.html { redirect_to ratings_path, notice: "Rating was succesfully updated!"}
+        else
+            format.html { redirect_to edit_rating_path(@rating), notice: "Score cannot be null and must be between 0 and 10!"}
+        end
+
+
+        end
+      else
+          redirect_to ratings_path, notice:"You cannot edit other users ratings!"
+      end
+  end
+
 
 
   # DELETE /ratings/1

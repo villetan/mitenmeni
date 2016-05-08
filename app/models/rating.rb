@@ -22,6 +22,10 @@ class Rating < ActiveRecord::Base
     not params[:score].nil? and params[:score].to_i >= 0 and params[:score].to_i <= 10 and (not params[:place_id].nil?)
   end
 
+  def self.validate_edit?(params)
+    not params[:score].nil? and not params[:score]=="" and params[:score].to_i >= 0 and params[:score].to_i <= 10
+  end
+
   def destroyRating
     Rating.find_by_sql(["DELETE FROM ratings WHERE rating_id=?", self.id])
   end
@@ -37,6 +41,14 @@ class Rating < ActiveRecord::Base
 
   def get_place
     PlaceApi.get_place(place_id)
+  end
+
+  def self.get_rating(id)
+    Rating.find_by_sql(["SELECT * FROM ratings WHERE rating_id=?", id]).to_a.first
+  end
+
+  def update_rating(params, id)
+    Rating.find_by_sql(["UPDATE ratings SET comment=(?), score=? WHERE rating_id=?", params[:comment], params[:score], id])
   end
 
 

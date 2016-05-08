@@ -10,7 +10,7 @@
   <% if @rating.user_id %>
       <%= link_to @rating.user.username, @rating.user  %>
   <% else %>
-    anon
+      anon
   <% end %>
 
 </p>
@@ -19,12 +19,15 @@
 </p>
 
 <% if @rating.comment%>
-<p>
-<strong>Comment:</strong>
-  <br>
+    <p>
+      <strong>Comment:</strong>
+      <br>
 
-  <%=@rating.comment%>
-</p>
+      <%=@rating.comment%>
+    </p>
 
-<%= link_to 'Back', :back %>
+    <%= link_to 'Back', :back %>
+    <% if current_user==User.getUser(@rating.user_id)%>
+        <%= link_to "Edit", edit_rating_path%>
+    <% end %>
 <% end %>

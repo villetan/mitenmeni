@@ -18,6 +18,11 @@
       <%= f.label :score %><br>
       <%= f.number_field :score %>
     </div>
+    <div class="field">
+      <%= f.label :comment %><br>
+      <%= f.text_area :comment, :spellcheck =>false %>
+    </div>
+
 
     <div class="actions">
       <%= f.submit %>
