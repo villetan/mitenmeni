@@ -13,26 +13,28 @@ class PlacesController < ApplicationController
       places=PlaceApi.search_place(params[:city], params[:type])
       @places=places.uniq{|p| p.place_id}
     else
+
       #jos city tyhjä, niin my location
-           if Rails.env.development? or Rails.env.test?
-           #geolocation
+      if Rails.env.development? or Rails.env.test?
+        #geolocation
 
-           #hima
-           loc=Geocoder.search("88.192.41.150").first.data["loc"]
-           #yo
-           #loc=Geocoder.search("128.214.138.171").first.data["loc"]
-           #new york
-           #loc=Geocoder.search("72.229.28.185").first.data["loc"]
+        #hima
+        loc=Geocoder.search("88.192.41.150").first.data["loc"]
+        #yo
+        #loc=Geocoder.search("128.214.138.171").first.data["loc"]
+        #new york
+        #loc=Geocoder.search("72.229.28.185").first.data["loc"]
 
-           elsif Rails.env.production?
-             loc=Geocoder.search(request.remote_ip).first.data["loc"]
-           end
-           splitted=loc.split(",")
-           lat=splitted.first
-           lng=splitted.second
-           places=PlaceApi.search_by_coordinates(lat, lng, params[:type])
-           @places=places.uniq{|p| p.place_id}
-         end
+      elsif Rails.env.production?
+        loc=Geocoder.search(request.remote_ip).first.data["loc"]
+      end
+
+      splitted=loc.split(",")
+      lat=splitted.first
+      lng=splitted.second
+      places=PlaceApi.search_by_coordinates(lat, lng, params[:type])
+      @places=places.uniq{|p| p.place_id}
+    end
 
 
 
@@ -46,6 +48,12 @@ class PlacesController < ApplicationController
     @place=PlaceApi.get_place(params[:id])
     @ratings = Rating.get_ratings_for_restaurant(params[:id])
     @rating=Rating.new
+    if @place.opening_hours
+      @days=@place.opening_hours["periods"]
+    end
+
+
+    # @place.opening_hours["periods"][0]["open"]["time"][0..1]
   end
 
   private

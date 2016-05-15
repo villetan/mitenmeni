@@ -132,8 +132,39 @@ describe "User" do
 
 
 
+  end
+
+#  describe "UsersController", type: :request do
+#    it "cannot edit other users" do
+#      create_user_pw("Ville")
+#      sign_in("Ville", "Kalle1")
+#      visit users_path
+#      click_link("Kalle")
+#      patch user_path(User.first), :params=>{:id=>User.first.id, :username=>"LOLl"}
+#      save_and_open_page
+#      expect(page).to have_content("You cannot edit other users!")
+#    end
+#  end
+
+
+  describe "Admin" do
+
+    it "can lock and unlock other users' accounts" do
+      create_admin
+      sign_in("Admin", "Kalle1")
+      visit users_path
+      click_link("Kalle")
+      expect(page).to have_content("Lock Kalle's account")
+
+      click_link("Lock Kalle's account")
+      expect(page).to have_content("USER LOCKED")
+      click_link("Unlock Kalle's account")
+      expect(page).to have_content("Lock Kalle's account")
+    end
 
   end
+
+
 end
 
 private
@@ -165,4 +196,13 @@ def friend_request_Ville
   click_link("Users")
   click_link("Ville")
   click_link("Add Ville as a friend")
+end
+
+def create_admin
+  user_params={"username" =>"Admin", "password" => "Kalle1", "password_confirmation"=>"Kalle1"}
+  password_salt = BCrypt::Engine.generate_salt
+  password_encrypted = BCrypt::Engine.hash_secret(user_params["password"], password_salt)
+  User.createNew(user_params, password_encrypted, password_salt)
+  User.all.select{|u| u.username=="Admin"}.first.update_attribute(:admin, true)
+
 end

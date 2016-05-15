@@ -121,6 +121,16 @@ RSpec.describe User, type: :model do
     expect(User.validate_edit?(params)).to be(true)
   end
 
+  it "has a method for freezing/unfreezing an account" do
+
+    User.create username:"hairikko", password_encrypted:"lol", password_salt:"lol"
+    expect(User.last.locked).to eq (false)
+    User.last.freeze_account
+    expect(User.last.locked).to eq (true)
+    User.last.freeze_account
+    expect(User.last.locked).to eq (false)
+  end
+
 
 
 end

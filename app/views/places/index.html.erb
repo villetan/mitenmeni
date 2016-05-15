@@ -10,7 +10,7 @@
         <div class="col-sm-3 ">
           <br>
           <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="my_place_checked">
-            <%= check_box "my_place", :checked, class:"mdl-checkbox__input", onchange:"toggleDisabled(this.checked)" %>
+            <%= check_box "my_place", :checked, class:"mdl-checkbox__input", onchange:"toggleDisabled(this.checked)", name:"my_place_checked", id:"my_place_checked" %>
             <span class="mdl-checkbox__label">My location</span>
           </label>
         </div>
@@ -23,7 +23,6 @@
         </div>
     </div>
 <% end %>
-
 <% if @places and @places.size>0  %>
 
 
@@ -40,7 +39,7 @@
       <% @places.each do |place| %>
           <tr>
 
-            <td><%=link_to place.name, places_path.to_s+"/"+place.place_id %></td>
+            <td><%=link_to place.name, places_path.to_s+"/"+place.place_id.to_s %></td>
             <td> <%place.types.each do |type| %>
                   <%=link_to type.capitalize.gsub('_', ' '), places_path(city: params[:city], type: type), method: :post %>,
               <% end %>

@@ -4,15 +4,13 @@
 <div class="col-md-6">
   <ul class="demo-list-icon mdl-list">
     <% @ratings.each do |rating| %>
-
         <li class="mdl-list__item mdl-list__item--three-line">
     <span class="mdl-list__item-primary-content">
       <i class="material-icons mdl-list__item-icon ">record_voice_over</i>
       <span>
 
-
         <% if rating.place_id %>
-        <%= link_to rating.get_place.name, places_path+"/"+rating.get_place.place_id %>
+        <%= link_to rating.get_place.name, places_path+"/"+rating.get_place.place_id.to_s %>
       <% end %>
       </span>
       <span class="mdl-list__item-text-body">
@@ -30,7 +28,10 @@
     <% end %>
   </ul>
 <span>
-  <a class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" href="/redirect_from_ratings"><i class="material-icons">add</i></a>
+  <a id="add_rating_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" href="/redirect_from_ratings"><i class="material-icons">add</i></a>
+  <div class="mdl-tooltip" for="add_rating_button">
+    Start<strong> rating shit!</strong>
+  </div>
 </span>
 </div>
 <br>

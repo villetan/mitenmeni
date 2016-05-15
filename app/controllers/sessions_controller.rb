@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+
     # haetaan usernamea vastaava käyttäjä tietokannasta
     user = User.getUserByUsername(params[:username])
     # talletetaan sessioon kirjautuneen käyttäjän id (jos käyttäjä on olemassa)

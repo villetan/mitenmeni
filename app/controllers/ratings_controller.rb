@@ -12,6 +12,7 @@ class RatingsController < ApplicationController
   # GET /ratings/1
   # GET /ratings/1.json
   def show
+
   end
 
   # GET /ratings/new
@@ -20,7 +21,7 @@ class RatingsController < ApplicationController
   end
 
   def redirect_from_ratings
-  redirect_to places_path, notice:"Etsi haluamasi paikka ja anna sille arvio!"
+  redirect_to places_path, notice:"Search for the desired place and rate that!"
   end
 
 #   GET /ratings/1/edit
@@ -30,6 +31,7 @@ class RatingsController < ApplicationController
   # POST /ratings
   # POST /ratings.json
   def create
+
     @rating = Rating.new(rating_params)
     respond_to do |format|
       if Rating.validate?(rating_params)

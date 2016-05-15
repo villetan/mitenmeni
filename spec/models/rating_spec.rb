@@ -68,10 +68,27 @@ RSpec.describe Rating, type: :model do
     expect(Rating.get_ratings_for_restaurant("asdffeqasd").map(&:score)).not_to include(10,7,2)
   end
 # tee ilman kyselyä!
-# it "has a method that fetches the corresponding place" do
-#   params1={:score=>6, :place_id=>"ChIJZZSm4sCcKkQRQFbBSlKsnjY"}
-#   Rating.createNew(params1, nil)
-#   expect(Rating.last.get_place.name).to eq("Neste Oil -huoltoasema")
-# end
+ it "has a method that fetches the corresponding place" do
+   allow(PlaceApi).to receive(:get_place).with("ChIJZZSm4sCcKkQRQFbBSlKsnjY").and_return(
+       ( Place.new( name:"Oljenkorsi", place_id: "ChIJZZSm4sCcKkQRQFbBSlKsnjY", types: ["restaurant"], formatted_address: "liibalaabakatu 1" ))
+   )
+   params1={:score=>6, :place_id=>"ChIJZZSm4sCcKkQRQFbBSlKsnjY"}
+   Rating.createNew(params1, nil)
+   expect(Rating.last.get_place.name).to eq("Oljenkorsi")
+ end
+
+  it "has a getter method for rating by id" do
+    id=Rating.last.id
+    expect(Rating.get_rating(id).score).to eq(9)
+    expect(Rating.get_rating(id).comment).to eq("moi")
+  end
+
+  it "has a edit method" do
+    params={:score=>1, :comment=>"moimoi"}
+    Rating.last.update_rating(params, Rating.last.id)
+    expect(Rating.validate_edit?(params)).to eq(true)
+    expect(Rating.last.score).to eq(1)
+    expect(Rating.last.comment).to eq("moimoi")
+  end
 
 end

@@ -19,7 +19,7 @@ class Rating < ActiveRecord::Base
 
 
   def self.validate?(params )
-    not params[:score].nil? and params[:score].to_i >= 0 and params[:score].to_i <= 10 and (not params[:place_id].nil?)
+    not params[:score].nil? and is_number?(params[:score]) and params[:score].to_i >= 0 and params[:score].to_i <= 10 and (not params[:place_id].nil?)
   end
 
   def self.validate_edit?(params)
@@ -59,4 +59,9 @@ class Rating < ActiveRecord::Base
   def model_client
     GooglePlaces::Client.new(ENV["GMAPS_KEY"])
   end
+end
+
+
+def is_number? string
+  true if Float(string) rescue false
 end

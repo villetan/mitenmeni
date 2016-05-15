@@ -17,15 +17,17 @@
 <p>
   <%= link_to @rating.get_place.name, places_path+"/"+@rating.get_place.place_id%>
 </p>
-
+<div class="col-xs-12 ">
 <% if @rating.comment%>
     <p>
       <strong>Comment:</strong>
       <br>
-
+      <div class="comment">
       <%=@rating.comment%>
-    </p>
+      </div>
 
+      </p>
+      </div>
     <%= link_to 'Back', :back %>
     <% if current_user==User.getUser(@rating.user_id)%>
         <%= link_to "Edit", edit_rating_path%>

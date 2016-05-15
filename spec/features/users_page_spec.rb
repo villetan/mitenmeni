@@ -29,6 +29,8 @@ describe "Users page" do
     expect(page).to have_content("No ratings yet!")
   end
 
+
+
 end
 
 private
@@ -38,4 +40,12 @@ def create_user_pw(username)
   password_salt = BCrypt::Engine.generate_salt
   password_encrypted = BCrypt::Engine.hash_secret(user_params["password"], password_salt)
   User.createNew(user_params, password_encrypted, password_salt)
+end
+
+def create_admin
+  user_params={"username" =>"Admin", "password" => "Kalle1", "password_confirmation"=>"Kalle1"}
+  password_salt = BCrypt::Engine.generate_salt
+  password_encrypted = BCrypt::Engine.hash_secret(user_params["password"], password_salt)
+  User.createNew(user_params, password_encrypted, password_salt)
+
 end

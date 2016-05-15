@@ -1,5 +1,5 @@
 <section>
-  <h1 class="text-center frontpage-header">Tervetuloa Miten Meni? -nettisivulle!</h1>
+  <h1 class="text-center frontpage-header"> Miten Meni? -nettisivulle!</h1>
   <p class="text-center frontpage-header">
     Miten meni noin niinkuin omasta mielestä?
     <br>
@@ -8,9 +8,10 @@
 
   <div class="text-center">
     <%if not current_user%>
-        <%=link_to "Sign in", signin_path, class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" %>
+        <%=link_to "Sign in", signin_path, class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent", id:"signin_button" %>
     <%end%>
     <%= link_to "Start rating places!", places_path, class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" %>
+
   </div>
 
 </section>
