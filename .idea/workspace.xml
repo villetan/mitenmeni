@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96a85c63-ad60-4d0c-a546-0ad47b7de9e0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.travis.yml" afterPath="$PROJECT_DIR$/.travis.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/database.yml" afterPath="$PROJECT_DIR$/config/database.yml" />
     </list>
     <ignored path="mitenmeni.iws" />
@@ -45,8 +44,8 @@
       <file leaf-file-name="database.yml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/config/database.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5651491">
-              <caret line="27" column="3" selection-start-line="27" selection-start-column="3" selection-end-line="27" selection-end-column="3" />
+            <state vertical-scroll-proportion="0.24646781">
+              <caret line="63" column="3" selection-start-line="63" selection-start-column="3" selection-end-line="63" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -1257,8 +1256,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/database.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5651491">
-          <caret line="27" column="3" selection-start-line="27" selection-start-column="3" selection-end-line="27" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.24646781">
+          <caret line="63" column="3" selection-start-line="63" selection-start-column="3" selection-end-line="63" selection-end-column="3" />
           <folding />
         </state>
       </provider>
