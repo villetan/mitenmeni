@@ -24,8 +24,8 @@ default: &default
 development:
   <<: *default
   database: mitenmeni_development
-  username: ville
-  password: vokj
+  #username: ville
+  #password: vokj
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
