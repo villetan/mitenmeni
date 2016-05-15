@@ -2,7 +2,10 @@ language: ruby
 
 rvm:
  - 2.3.0
-
+ 
+before_script:
+  - psql -c "CREATE USER ville WITH PASSWORD 'ville';" -U postgres 
+  - psql -c 'create database mitenmeni_test;' -U postgres
 
 script:
  - bundle exec rake db:migrate --trace
