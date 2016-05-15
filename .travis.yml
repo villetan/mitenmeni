@@ -6,6 +6,8 @@ rvm:
 before_script:
   - psql -c "CREATE USER ville WITH PASSWORD 'ville';" -U postgres 
   - psql -c 'create database mitenmeni_test;' -U postgres
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
 
 script:
  - bundle exec rake db:migrate --trace
