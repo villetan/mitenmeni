@@ -41,6 +41,8 @@ class User < ActiveRecord::Base
 
 
   def destroyUser
+    Rating.find_by_sql(["UPDATE ratings set user_id=NULL WHERE user_id=(?)", self.id])
+
     User.find_by_sql(["DELETE FROM users WHERE user_id=?", self.id])
   end
 

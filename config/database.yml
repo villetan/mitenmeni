@@ -33,9 +33,9 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  #database: mitenmeni_development
-  #username: ville
-  #password: vokj
+  database: mitenmeni_development
+  username: ville
+  password: vokj
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -70,9 +70,9 @@ development:
 
 test:
   <<: *defaults
-  #database: mitenmeni_test
-  #username: ville
-  #password: vokj
+  database: mitenmeni_test
+  username: ville
+  password: vokj
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is

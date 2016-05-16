@@ -22,7 +22,7 @@
     <div class="actions">
       <%= submit_tag "Submit", class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" %>
       <%if current_user and @user==current_user%>
-      <%= link_to "Delete user #{@user.username}",user_path(current_user), class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent", method: :delete, data: { confirm: 'User will be permanently deleted' } %>
+      <%= link_to "Delete user #{@user.username}",user_path(current_user), class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent", method: :delete, data: { confirm: 'User will be permanently deleted, ratings that you might have done will stay as from anonomys user ratings. If you do not want that, please delete the ratings one by one' } %>
           </div>
         <%end%>
 <% end %>

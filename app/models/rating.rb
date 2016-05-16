@@ -54,6 +54,8 @@ class Rating < ActiveRecord::Base
 
 
 
+
+
 #paskaa!
   private
   def model_client
