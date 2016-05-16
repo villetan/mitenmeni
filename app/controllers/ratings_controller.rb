@@ -74,11 +74,18 @@ class RatingsController < ApplicationController
   # DELETE /ratings/1
   # DELETE /ratings/1.json
   def destroy
+    if current_user==@rating.get_user
     @rating.destroyRating
     respond_to do |format|
       format.html { redirect_to ratings_url, notice: 'Rating was successfully destroyed.' }
       format.json { head :no_content }
+
+
+
     end
+    else
+        redirect_to :back, notice: "Cannot destroy other user's ratings"
+        end
   end
 
   private
