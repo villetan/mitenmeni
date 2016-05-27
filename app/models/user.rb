@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
 
   def destroyUser
     Rating.find_by_sql(["UPDATE ratings set user_id=NULL WHERE user_id=(?)", self.id])
-    Friendship.find_by(["DELETE FROM friendships WHERE friend_a_id=? OR friend_b_id=?", self.id,self.id])
+    Friendship.find_by_sql(["DELETE FROM friendships WHERE friend_a_id=? OR friend_b_id=?",self.id, self.id])
     User.find_by_sql(["DELETE FROM users WHERE user_id=?", self.id])
   end
 
