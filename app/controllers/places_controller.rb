@@ -8,18 +8,18 @@ class PlacesController < ApplicationController
   end
 
   def search
-
+    #jos city tyhjä, niin my location
     if params[:city]
       places=PlaceApi.search_place(params[:city], params[:type])
       @places=places.uniq{|p| p.place_id}
     else
 
-      #jos city tyhjä, niin my location
+
       if Rails.env.development? or Rails.env.test?
         #geolocation
 
         #hima
-        loc=Geocoder.search("88.192.41.150").first.data["loc"]
+        loc=Geocoder.search("84.251.113.199").first.data["loc"]
         #yo
         #loc=Geocoder.search("128.214.138.171").first.data["loc"]
         #new york

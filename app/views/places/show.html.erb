@@ -55,8 +55,10 @@
                   S
               <%end%>
             </th>
+            <% if day["open"] and day["open"]["time"] and day["close"] and day["close"]["time"]%>
             <td><%= day["open"]["time"] %></td>
             <td><%= day["close"]["time"]%></td>
+            <% end %>
           </tr>
           <%i=i+1%>
       <% end %>
